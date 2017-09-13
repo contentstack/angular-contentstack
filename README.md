@@ -11,10 +11,12 @@ Include the AngularJS min file in the script tag.
 <script type="text/javascript" src="angular.min.js"></script>
 ```
 
-Download [Contentstack JS SDK](https://contentstackdocs.built.io/developer/javascript/sdk-download) and include contentstack sdk min file in the script tag.
+Download [Contentstack JS SDK](https://contentstackdocs.built.io/developer/javascript/sdk-download) and extract the folder and copy the contentstack-v3.1.1.min.js file into your project directory.
+
+Include contentstack sdk min file in the script tag.
 
 ```xml
-<script type="text/javascript" src="contentstack.min.js"></script>
+<script type="text/javascript" src="contentstack-v3.1.1.min.js"></script>
 ```
 
 Include the Contentstack AngularJS min file in the script tag.
