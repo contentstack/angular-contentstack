@@ -1,6 +1,10 @@
 # angular-contentstack
 AngularJS module for Built.io Contentstack - Content Delivery API
 
+## Prerequisites
+* Download [Angularjs 1.x](https://angularjs.org/) library
+* Download latest [Contentstack JS SDK](https://contentstackdocs.built.io/developer/javascript/sdk-download) 
+
 ## Usage
 
 **Setup**
@@ -11,7 +15,7 @@ Include the AngularJS min file in the script tag.
 <script type="text/javascript" src="angular.min.js"></script>
 ```
 
-Download [Contentstack JS SDK](https://contentstackdocs.built.io/developer/javascript/sdk-download) and extract the folder and copy the contentstack-v3.1.1.min.js file into your project directory.
+Extract the downloaded contentstack JS SDK folder and copy the contentstack-v3.1.1.min.js file into your project directory.
 
 Include contentstack sdk min file in the script tag.
 
