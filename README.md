@@ -9,19 +9,24 @@ AngularJS module for Built.io Contentstack - Content Delivery API
 
 **Setup**
 
-Include the AngularJS min file in the script tag.
+Include AngularJS and Contentstack JS prerequisites libraries.
 
-Extract downloaded Contentstack JS SDK folder into your project and include contentstack-javascript-master/dist/web/contentstack.js file in the script tag.
+```javascript
+<script type="text/javascript" src="path_to_file/angularjs_1.x.js"> 
+<script type="text/javascript" src="path_to_file/contentstack.min.js">
+```
 
-Include the Contentstack AngularJS min file in the script tag.
+Include the Contentstack AngularJS min file from dist folder.
 
-```xml
+```javascript
 <script type="text/javascript" src="dist/angular-contentstack.min.js"></script>
 ```
 
-Then add the `contentstack` module to the dependencies of your AngularJS application module and configure it in a config block using the `stackProvider`:
 
 **Configuration**
+
+Add the `contentstack` module to the dependencies of your AngularJS application module and configure it in a config block using the `stackProvider`:
+
 ###
 ```javascript
 angular.module('app', ['contentstack']);
@@ -62,7 +67,7 @@ Retrive all the entires or a single entry of a Content Type.
     </ul>
   </contentstack-entry>
 ```
-Note: If "as" attribute is not provided then by default the entries are available as $contentstackEntries variable.
+Note: If “as” attribute is not provided then by default the entries are available as $contentstackEntries variable.
 
 ##### Get a single Entry using entry ID :
 ```xml
@@ -71,7 +76,7 @@ Note: If "as" attribute is not provided then by default the entries are availabl
     <h1>{{entry.title}}</h1>
   </contentstack-entry>
 ```
-Note: If "as" attribute is not provided then by default the entry is available as $contentstackEntry variable.
+Note: If “as” attribute is not provided then by default the entry is available as $contentstackEntry variable.
 
 ##### Queries  :
 All the JS SDK Query functions are supported as an attribute.
@@ -80,15 +85,15 @@ For Example:
 
 **limit**
 
-        <contentstack-entry content-type="news" limit="5">
+        <contentstack-entry content-type=“news” limit=“5">
 
 **locale**
 
-        <contentstack-entry content-type="news" locale="hi-hi">
+        <contentstack-entry content-type=“news” locale=“hi-hi”>
 
 **includeReference**
 
-        <contentstack-entry content-type="news" includeReference="categories">
+        <contentstack-entry content-type=“news” includeReference=“categories”>
 
 
 For more functions, check out the [JS SDK Query documentation](https://contentstackdocs.built.io/js/api/global.html#Query).
@@ -97,10 +102,10 @@ For more functions, check out the [JS SDK Query documentation](https://contentst
 The contentstack service can be injected as follows:
 
     angular
-    .module('myApp')
-    .controller('MyController', function(contentstack){
+    .module(‘myApp’)
+    .controller(‘MyController’, function(contentstack){
         // contentstack service is a stack object initialiased with options provided to the stackProvider.
-        var Query = contentstack.ContentType("News").Query(); // build query object for news content type
+        var Query = contentstack.ContentType(“News”).Query(); // build query object for news content type
         Query
           .limit(10)
           .toJSON()
