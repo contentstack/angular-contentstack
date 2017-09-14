@@ -1,38 +1,37 @@
 # angular-contentstack
+
 AngularJS module for Built.io Contentstack - Content Delivery API
 
 ## Prerequisites
 * Download [Angularjs 1.x](https://angularjs.org/) library
-* Download latest [Contentstack JS SDK](https://github.com/builtio-contentstack/contentstack-javascript) 
+* Download latest [Contentstack JS SDK](https://github.com/builtio-contentstack/contentstack-javascript)
 
 ## Usage
 
 **Setup**
 
-Include AngularJS and Contentstack JS prerequisites libraries.
+Include AngularJS and Contentstack JS prerequisite libraries with the following code snippet:
 
-```javascript
-<script type="text/javascript" src="path_to_file/angularjs_1.x.js"> 
-<script type="text/javascript" src="path_to_file/contentstack.min.js">
+```xml
+<script type="text/javascript" src="path_to_file/angularjs_1.x.js"></script>
+<script type="text/javascript" src="path_to_file/contentstack.min.js"></script>
 ```
 
-Include the Contentstack AngularJS min file from dist folder.
+Include the Built.io Contentstack AngularJS min file from dist folder with the following code snippet:
 
-```javascript
+```xml
 <script type="text/javascript" src="dist/angular-contentstack.min.js"></script>
 ```
 
-
 **Configuration**
 
-Add the `contentstack` module to the dependencies of your AngularJS application module and configure it in a config block using the `stackProvider`:
+Add the `contentstack` module to the dependencies of your AngularJS application module and configure it in a config block using `stackProvider`:
 
-###
-```javascript
+```xml
 angular.module('app', ['contentstack']);
 ```
 
-```javascript
+```xml
 angular
    .module('app')
    .config(['$locationProvider', 'stackProvider',
@@ -40,102 +39,104 @@ angular
           // initialize the stack
           stackProvider.initialize({
               'api_key': 'Stack api key',
-              'access_token': 'Stack accestoken',
+              'access_token': 'Stack accesstoken',
               'environment': 'Your environment'
           });
       }
   ]);
 ```
-
-Once stackProvider configuration is done, you can use directives and services.
+Once you have configured stackProvider, you can use directives and services.
 
 ## contentstack-entry directive
-Retrive all the entires or a single entry of a Content Type.
+Retrieve a single entry or all entries of a Content Type.
 
 ##### Syntax:
-```xml
+
+```sh
     <contentstack-entry content-type="{Content_Type_ID}"> </contentstack-entry>
 ```
 
 ##### Get multiple entries :
 
-```xml
+```sh
   <contentstack-entry content-type="blog" as="entries">
-    <!--Your will get "entires" array of entry objects -->
+    <!--Your will get "entries" array of entry objects -->
     <ul>
      <li data-ng-repeat="entry in entries">{{entry.title}}</li>
     </ul>
   </contentstack-entry>
 ```
-Note: If “as” attribute is not provided then by default the entries are available as $contentstackEntries variable.
+Note: If the as attribute is not provided, then, by default, the entries will be available with the $contentstackEntries variable.
 
-##### Get a single Entry using entry ID :
+##### Get a single Entry using entry ID
+
 ```xml
   <contentstack-entry content-type="news" uid="blt12345678910" as="entry">
     <!--Your will get "entry" object -->
     <h1>{{entry.title}}</h1>
   </contentstack-entry>
 ```
-Note: If “as” attribute is not provided then by default the entry is available as $contentstackEntry variable.
+
+Note: If the as attribute is not provided, then, by default, the entry is available with the $contentstackEntry variable.
 
 ##### Queries  :
-All the JS SDK Query functions are supported as an attribute.
+All the JavaScript SDK query functions are supported. You can use them as attributes.
 
 For Example:
 
 **limit**
 
-        <contentstack-entry content-type=“news” limit=“5">
+<contentstack-entry content-type="news" limit="5">
 
 **locale**
 
-        <contentstack-entry content-type=“news” locale=“hi-hi”>
+<contentstack-entry content-type="news" locale="hi-hi">
 
 **includeReference**
 
-        <contentstack-entry content-type=“news” includeReference=“categories”>
-
+<contentstack-entry content-type="news" includeReference="categories">
 
 For more functions, check out the [JS SDK Query documentation](https://contentstackdocs.built.io/js/api/global.html#Query).
 
 ## Service
 The contentstack service can be injected as follows:
 
-    angular
-    .module(‘myApp’)
-    .controller(‘MyController’, function(contentstack){
-        // contentstack service is a stack object initialiased with options provided to the stackProvider.
-        var Query = contentstack.ContentType(“News”).Query(); // build query object for news content type
-        Query
-          .limit(10)
-          .toJSON()
-          .find()
-          .then(function success(result) {
-            // result is array where -
-            // result[0] => entry objects
-            // result[result.length-1] => entry objects count included only when .includeCount() is queried.
-            // result[1] => schema of the content type is included when .includeSchema() is queried.
-        }, function error(err) {
-           // err object
-        })
-    });
-
+```xml
+Angular
+.module(‘myApp’)
+.controller(‘MyController’, function(contentstack){
+// contentstack service is a stack object initialized with options provided to the stackProvider.
+var Query = contentstack.ContentType(“News”).Query(); // build query object for news content type
+Query
+.limit(10)
+.toJSON()
+.find()
+.then(function success(result) {
+// result is array where -
+// result[0] => entry objects
+// result[result.length-1] => entry objects count included only when .includeCount() is queried.
+// result[1] => schema of the content type is included when .includeSchema() is queried.
+}, function error(err) {
+// err object
+})
+});
+```
 # Pagination
-
-The pagination helper can be used to paginate contentstack entries. Lets take a look at the variables and functions it provides -
+The pagination helper can be used to paginate contentstack entries. Let’s take a look at the variables and functions it provides.
 
 **Pagination Variables**
-* **$pagination.currentPage**- gives current page number
-* **$pagination.totalPages**- gives total number of pages
-* **$pagination.totalCount**- gives total number of entries
-* **$pagination.itemsPerPage**- gives count of entries per page
+* **$pagination.currentPage** - This gives current page number
+* **$pagination.totalPages** - This gives total number of pages
+* **$pagination.totalCount** - This gives total number of entries
+* **$pagination.itemsPerPage** - This gives count of entries per page
 
 **Pagination Methods**
-* **$pagination.previous()**- returns pervious page entries and replaces the DOM with the new page entries
-* **$pagination.next()**- returns next page entries and replaces the DOM with new page entries
-* **$pagination.loadMore()**- load next page entries and appends new entries in DOM. Use this for infinite scrolling.
+* **$pagination.previous()** - This method returns previous page entries and replaces the DOM with the new page entries
+* **$pagination.next()** - This method returns next page entries and replaces the DOM with new page entries
+* **$pagination.loadMore()** - This method loads the entries of the next page and appends new entries in DOM. Use this for infinite scrolling.
 
 **Example (Next/Previous Pagination):**
+
 ``` sh
 <button data-ng-disabled ="$pagination.currentPage === 1" data-ng-if="entry" data-ng-click="$pagination.previous()">Previous</button>
 <button data-ng-disabled="$pagination.currentPage === $pagination.totalPages" data-ng-if="entries" data-ng-click="!isLoading && $pagination.next()">Next</button>
@@ -173,9 +174,6 @@ The pagination helper can be used to paginate contentstack entries. Lets take a 
     <button data-ng-if="!$isLoading && ($pagination.currentPage !== $pagination.totalPages)" data-ng-click="$pagination.loadMore()">loadMore</button>
 </contentstack-entry>
 ```
-
 # DEMO
 * [News App Example with Next/Previous Pagination](https://plnkr.co/edit/9DwuB4b2FZkaOooi7CCO?p=preview)
 * [News App Example with Infinite Scroll (load more)](https://plnkr.co/edit/lDB8Gy9G3aupt4wCbRlo?p=preview )
-<!-- * [Sample Ionic App](https://harshalpatel91.github.io/Ionic_using_Ng-contentsatck/#/app/overview)
- -->
