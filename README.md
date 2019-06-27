@@ -1,5 +1,5 @@
 # angular-contentstack
-AngularJS module for Built.io Contentstack - Content Delivery API
+AngularJS module for Contentstack - Content Delivery API
 
 ## Usage
 
@@ -83,7 +83,7 @@ For Example:
         <contentstack-entry content-type="news" includeReference="categories">
 
 
-For more functions, check out the [JS SDK Query documentation](https://contentstackdocs.built.io/js/api/global.html#Query).
+For more functions, check out the [JS SDK Query documentation](https://www.contentstack.com/docs/platforms/javascript-browser/api-reference/).
 
 ## Service
 The contentstack service can be injected as follows:
